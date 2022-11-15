@@ -20,6 +20,7 @@ defmodule Tutorial.Meerkats do
   """
   def list_meerkats(opts \\ %{}) do
     from(m in Meerkat)
+    |> Query.Meerkat.filter(opts)
     |> Query.Meerkat.sort(opts)
     |> Repo.all()
   end
