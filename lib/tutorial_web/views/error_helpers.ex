@@ -10,6 +10,7 @@ defmodule TutorialWeb.ErrorHelpers do
   """
   def error_tag(form, field, extra_props \\ []) do
     classes = Keyword.get(extra_props, :class, "block mt-1 text-sm text-red-700")
+
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
       content_tag(:span, translate_error(error),
         class: classes,

@@ -1,0 +1,10 @@
+<table>
+  <tbody>
+    <%= for meerkat <- @meerkats do %>
+      <tr>
+        <td><%= meerkat.id %></td>
+        <td><%= meerkat.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
