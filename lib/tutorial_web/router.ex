@@ -17,7 +17,7 @@ defmodule TutorialWeb.Router do
   scope "/", TutorialWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", MeerkatLive.Index, :index
     live "/tutorial", TutorialLive.Index, :index
   end
 
