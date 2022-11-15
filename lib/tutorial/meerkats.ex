@@ -7,6 +7,7 @@ defmodule Tutorial.Meerkats do
   alias Tutorial.Repo
 
   alias Tutorial.Meerkats.Meerkat
+  alias Tutorial.Meerkats.Query
 
   @doc """
   Returns the list of meerkats.
@@ -17,8 +18,10 @@ defmodule Tutorial.Meerkats do
       [%Meerkat{}, ...]
 
   """
-  def list_meerkats do
-    Repo.all(Meerkat)
+  def list_meerkats(opts \\ %{}) do
+    from(m in Meerkat)
+    |> Query.Meerkat.sort(opts)
+    |> Repo.all()
   end
 
   @doc """
