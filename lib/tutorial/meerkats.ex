@@ -25,6 +25,24 @@ defmodule Tutorial.Meerkats do
     |> Repo.all()
   end
 
+  def list_meerkats_with_total_count(opts) do
+    query = from(m in Meerkat) |> Query.Meerkat.filter(opts)
+    total_count = Repo.aggregate(query, :count)
+
+    IO.inspect("@@@ OPTS @@@@@@@")
+    IO.inspect(opts)
+    IO.inspect("@@@@@@@@@@")
+
+    result =
+      query
+      |> Query.Meerkat.sort(opts)
+      |> Query.Meerkat.paginate(opts)
+      |> IO.inspect(label: :QUERY)
+      |> Repo.all()
+
+    %{meerkats: result, total_count: total_count}
+  end
+
   @doc """
   Gets a single meerkat.
 

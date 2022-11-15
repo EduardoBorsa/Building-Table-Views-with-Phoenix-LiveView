@@ -19,7 +19,7 @@ defmodule Tutorial.Meerkats.Query.Meerkat do
     where(query, [m], m.id == ^id)
   end
 
-  defp filter_by_id(query, opts) do
+  defp filter_by_id(query, _opts) do
     query
   end
 
@@ -30,4 +30,15 @@ defmodule Tutorial.Meerkats.Query.Meerkat do
   end
 
   defp filter_by_name(query, _opts), do: query
+
+  def paginate(query, %{page: page, page_size: page_size})
+      when is_integer(page) and is_integer(page_size) do
+    offset = max(page - 1, 0) * page_size
+
+    query
+    |> limit(^page_size)
+    |> offset(^offset)
+  end
+
+  def paginate(query, _opts), do: query
 end
